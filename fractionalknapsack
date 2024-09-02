@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define N 30
+
+int v[N];
+int w[N];
+
+
+ int swap(int* a,int* b){
+  int temp=*a;
+  *a=*b;
+  *b=temp;
+  }
+  int sortItems(int n,int w[],int v[]){
+      float ratio[n];
+      for(int i=0;i<n;i++){
+       ratio[i]=(float) v[i]/ w[i];
+      }
+      for(int i=0;i<n-1;i++){
+        for(int j=0;j<n-i-1;j++){
+            if(ratio[j]<ratio[j+1]){
+                swap(&ratio[j],&ratio[j+1]);
+                swap((float*)&w[j],(float*)&w[j+1]);
+                swap((float*)&v[j],(float*)&v[j+1]);
+
+            }
+        }
+      }
+  }
+  float Fknapsack(int W,int w[],int v[],int n ){
+     sortItems(n,w,v);
+     int cw=0;
+     int fv=0;
+     for(int i=0;i<n;i++){
+        if(cw+w[i]<=W){
+            cw+=w[i];
+            fv+=v[i];
+        }
+        else {
+            int remain=W-cw;
+            fv+=v[i]*((float)remain/w[i]);
+            break;
+        }
+     }
+     return fv;
+
+     }
+int main()
+     {
+        int n;
+  printf("enter the number of objects :");
+  scanf("%d" ,&n);
+  int W;
+
+    printf("enter the maximum weight  :");
+  scanf("%d" ,&W);
+
+  int v[n];
+  int w[n];
+
+  printf("enter the profit of the objects :");
+  for(int i=0; i<n;i++)
+  {
+    scanf("%d" , &v[i]);
+  }
+
+
+  printf("enter the weight of the objects :");
+  for(int i=0; i<n;i++)
+  {
+    scanf("%d" , &w[i]);
+  }
+
+  printf("the maximum profit is : %2f" , Fknapsack(W, w, v, n));
+
+  return 0;
+
+
+}
