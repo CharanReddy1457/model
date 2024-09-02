@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node{
+    int key;
+    struct node*left;
+    struct node*right;
+
+};
+
+
+struct node* insert(struct node*root,int key){
+     struct node*newnode=(struct node*)malloc(sizeof(struct node));
+     newnode->left=NULL;
+     newnode->right=NULL;
+     newnode->key=key;
+
+     if(root==NULL){
+        return newnode;
+     }
+     if (key < root->key)
+        root->left = insert(root->left, key);
+    else if (key > root->key)
+        root->right = insert(root->right, key);
+
+    return root;
+}
+
+void inOrderTraversal(struct node* root) {
+    if (root != NULL) {
+        inOrderTraversal(root->left);
+        printf("%d ", root->key);
+        inOrderTraversal(root->right);
+    }
+}   int main() {
+    struct Node* root = NULL;
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
+
+    printf("In-order traversal: ");
+    inOrderTraversal(root);
+    printf("\n");
+    if(search(root,60)!=NULL){
+        printf("found");
+    }
+    else{
+        printf("not present");
+    }
