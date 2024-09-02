@@ -1,0 +1,36 @@
+int BinSrch(int arr[],int low,int high,int srch){
+    if(low>high){
+        return -1;
+    }
+    int mid=(low+high)/2;
+
+    if(srch<arr[mid]){
+        return BinSrch(arr,low,mid-1,srch);
+    }
+     if(srch==arr[mid]){
+        return mid;
+    }
+    else {
+        return BinSrch(arr,mid+1,high,srch);
+    }
+
+
+}
+
+int main(){
+    int arr[7]={3,5,8,99,43,25,4};
+    sort(arr,7);
+    int srch;
+    scanf("%d",&srch);
+    int ans=BinSrch(arr,0,6,srch);
+    if(ans!=-1){
+        printf("Element found at  %d poisition ",ans);
+    }
+    else{
+        printf("Element not found ");
+    }
+
+
+
+
+}
