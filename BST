@@ -33,7 +33,17 @@ void inOrderTraversal(struct node* root) {
         printf("%d ", root->key);
         inOrderTraversal(root->right);
     }
-}   int main() {
+} 
+ struct node* search(struct node * root, int x){  
+  if (root == NULL || root->key == x)  
+    return root;  
+  else if (x > root->key)  
+    return search(root->right, x);  
+  else  
+    return search(root->left, x);  
+} 
+
+ int main() {
     struct Node* root = NULL;
     root = insert(root, 50);
     insert(root, 30);
